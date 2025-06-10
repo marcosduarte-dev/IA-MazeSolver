@@ -244,7 +244,7 @@ class MazeUI(tk.Tk):
         messagebox.showinfo('Info', 'Treinamento do agente concluído!')
 
     def solve_rl(self):
-        path = self.agent.get_policy_path(self.maze, (0,0), (self.rows-1, self.cols-1))
+        path, total_steps = self.agent.get_policy_path_with_steps(self.maze, (0,0), (self.rows-1, self.cols-1))
         if len(path) <= 1:
             messagebox.showinfo('Info', 'O agente não encontrou um caminho até o objetivo!')
             return
@@ -259,7 +259,7 @@ class MazeUI(tk.Tk):
             self.after(delay, lambda: self.animate_path(path[1:], delay))
 
     def solve_dijkstra(self):
-        path = dijkstra(self.maze, (0,0), (self.rows-1, self.cols-1))
+        path, total_steps = dijkstra(self.maze, (0,0), (self.rows-1, self.cols-1))
         if len(path) <= 1:
             messagebox.showinfo('Info', 'Dijkstra não encontrou um caminho até o objetivo!')
             return
